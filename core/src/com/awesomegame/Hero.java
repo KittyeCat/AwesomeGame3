@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
- * Created by Basil on 25/06/2015.
+ * Created by Basil on 25/06/2015. LOL
  */
 public class Hero extends Actor {
 
