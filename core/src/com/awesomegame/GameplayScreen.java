@@ -1,6 +1,9 @@
 package com.awesomegame;
 
 import com.awesomegame.AwesomeGame;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -16,10 +19,13 @@ public class GameplayScreen extends ScreenAdapter {
     protected AwesomeGame game;
     protected OrthographicCamera camera;
 
+    public static final int TILESIZE = 32;
+    public static final int WORLDWIDTH = 800;
+    public static final int WORLDHEIGHT = 800;
+
     private Stage gameplayStage;
     private Hero hero;
     private Image background;
-
 
 
     public GameplayScreen(AwesomeGame game){
@@ -39,16 +45,25 @@ public class GameplayScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            hero.move(hero.LEFT);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            hero.move(hero.RIGHT);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+            hero.move(hero.UP);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            hero.move(hero.DOWN);
+        }
+
         gameplayStage.act();
         gameplayStage.draw();
     }
 
-
-
-
     @Override
     public void resize(int width, int height) {
         camera.setToOrtho(false, width, height);
-
     }
 }

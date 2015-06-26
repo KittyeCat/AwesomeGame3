@@ -1,5 +1,6 @@
 package com.awesomegame;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -12,15 +13,22 @@ public class Hero extends Actor {
 
     public static final int WIDTH = 72;
     public static final int HEIGHT = 72;
+    public static final int VEL = 8;
+    public static final int LEFT = 0;
+    public static final int RIGHT = 1;
+    public static final int UP = 2;
+    public static final int DOWN = 3;
 
-
-    private Vector2 vel;
+/*  private Vector2 vel;
     private Vector2 accel;
+    private State orientation;
+    private enum State {left, right, up, down}; */
 
     private TextureRegion region;
 
-    private State state;
-    private enum State {alive, dead};
+    private boolean isMoving;
+    private int orientation;
+    private int movementCtr;
 
     public Hero() {
 
@@ -28,8 +36,10 @@ public class Hero extends Actor {
         setWidth(WIDTH);
         setHeight(HEIGHT);
 
-        vel = new Vector2();
-        accel = new Vector2();
+        //vel = new Vector2();
+        //accel = new Vector2();
+        isMoving = false;
+        orientation  = DOWN;
     }
 
 
@@ -40,6 +50,31 @@ public class Hero extends Actor {
 
     @Override
     public void act(float delta) {
-        super.act(delta);
+        if (isMoving && movementCtr < GameplayScreen.TILESIZE){
+            if (orientation == LEFT && getX() > 0 ) {
+                moveBy(-VEL, 0);
+            }
+            if (orientation == RIGHT && getX() < GameplayScreen.WORLDWIDTH) {
+                moveBy(VEL, 0);
+            }
+            if (orientation == UP && getY() < GameplayScreen.WORLDHEIGHT) {
+                moveBy(0, VEL);
+            }
+            if (orientation == DOWN && getY() > 0) {
+                moveBy(0, -VEL);
+            }
+            movementCtr += VEL;
+        }
+        else {
+            isMoving = false;
+            movementCtr = 0;
+        }
+    }
+
+    public void move(int orientation){
+        if(movementCtr == 0) {
+            isMoving = true;
+            this.orientation = orientation;
+        }
     }
 }

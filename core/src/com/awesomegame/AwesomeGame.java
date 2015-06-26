@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class AwesomeGame extends Game {
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
-
 	
 	@Override
 	public void create () {
