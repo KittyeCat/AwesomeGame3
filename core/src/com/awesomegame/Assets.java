@@ -24,7 +24,6 @@ public class Assets {
         hero = atlas.findRegion("hero");
         background = atlas.findRegion("map");
 
-
     }
 
     public static void dispose() {

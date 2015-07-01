@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
@@ -45,21 +46,28 @@ public class GameplayScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            hero.move(hero.LEFT);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            hero.move(hero.RIGHT);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-            hero.move(hero.UP);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            hero.move(hero.DOWN);
-        }
+        processInput();
+        camera.position.set(hero.getX(), hero.getY(), 0);
+        camera.update();
 
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gameplayStage.act();
         gameplayStage.draw();
+    }
+
+    public void processInput() {
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
+            hero.move(hero.LEFT);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
+            hero.move(hero.RIGHT);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)){
+            hero.move(hero.UP);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)){
+            hero.move(hero.DOWN);
+        }
     }
 
     @Override

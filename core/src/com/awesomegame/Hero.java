@@ -51,16 +51,16 @@ public class Hero extends Actor {
     @Override
     public void act(float delta) {
         if (isMoving && movementCtr < GameplayScreen.TILESIZE){
-            if (orientation == LEFT && getX() > 0 ) {
+            if (orientation == LEFT && getX() + (WIDTH - GameplayScreen.TILESIZE) / 2 > 0 ) {
                 moveBy(-VEL, 0);
             }
-            if (orientation == RIGHT && getX() < GameplayScreen.WORLDWIDTH) {
+            if (orientation == RIGHT && getX() + WIDTH < GameplayScreen.WORLDWIDTH + (WIDTH - GameplayScreen.TILESIZE) / 2 ) {
                 moveBy(VEL, 0);
             }
-            if (orientation == UP && getY() < GameplayScreen.WORLDHEIGHT) {
+            if (orientation == UP && getY() + HEIGHT < GameplayScreen.WORLDHEIGHT + (HEIGHT - GameplayScreen.TILESIZE) / 2 ) {
                 moveBy(0, VEL);
             }
-            if (orientation == DOWN && getY() > 0) {
+            if (orientation == DOWN && getY()  + (WIDTH - GameplayScreen.TILESIZE) / 2 > 0) {
                 moveBy(0, -VEL);
             }
             movementCtr += VEL;
