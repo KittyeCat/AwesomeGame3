@@ -42,7 +42,6 @@ public class Hero extends Actor {
         orientation  = DOWN;
     }
 
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
